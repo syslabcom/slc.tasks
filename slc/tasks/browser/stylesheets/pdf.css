@@ -1,0 +1,117 @@
+@page {
+    size: A4;
+
+    margin-top: 25mm;
+    margin-right: 15mm;
+    margin-left: 15mm;
+
+    @bottom { content: flow(footer); }
+/*    @bottom { content: counter(page); }*/
+}
+
+/*@page:first {
+
+    @top {
+        content: flow(firstpage);
+    }
+}*/
+
+* {
+    font-family: "Trebuchet MS", Verdana, Arial;
+}
+
+
+.title-box table {
+    text-align: center;
+    width: 100%;
+}
+
+#title-box-logo {
+    width: 150px;
+}
+
+#title-box-text {
+    font-weight: bold;
+    font-size: 18px;
+    vertical-align: middle;
+    color: #003366;
+}
+
+h2#subtitle {
+    font-weight: bold;
+    font-size: 15px;
+    vertical-align: left;
+    color: #003366;
+}
+
+img.check-icon {
+    width: 12px;
+    height: 12px;
+}
+
+#treetable {
+   font-size: 70%;
+}
+
+#treetable-scroll, table#treetable {
+    border: none;
+}
+
+#treetable-container, table#treetable td {
+   border: 1px solid #E3E2E2;
+}
+
+#treetable tbody {
+   font-size: 85%;
+}
+
+#treetable td
+{
+    padding-left: 10px;
+}
+
+#treetable tr.task-level-1 td.first-col
+{
+    padding-left: 5px;
+}
+
+#treetable tr.task-level-2 td.first-col
+{
+    padding-left: 15px;
+}
+
+#treetable tr.task-level-3 td.first-col
+{
+    padding-left: 25px;
+}
+
+#treetable tr.task-level-4 td.first-col
+{
+    padding-left: 35px;
+}
+
+#treetable tr.task-level-5 td.first-col
+{
+    padding-left: 45px;
+}
+
+/* 
+ * footer
+*/
+
+.footer {
+    flow: static(footer);
+}
+
+#footer-page-counter,
+#footer-text {
+    text-align: center;
+    font-size: 10px;
+}
+
+#footer-text {
+    margin-bottom: 1em;
+}
+
+#footer-page-counter {
+}

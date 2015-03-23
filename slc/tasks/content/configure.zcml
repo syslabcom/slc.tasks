@@ -1,0 +1,32 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:five="http://namespaces.zope.org/five"
+    i18n_domain="slc.tasks">
+
+  <!-- configure your content components here -->
+  
+  <!-- -*- extra stuff goes here -*- -->
+  <class class=".taskresponse.TaskResponse">
+    <require
+        permission="zope2.View"
+        interface="..interfaces.ITaskResponse"
+        />
+  </class>
+  <class class=".taskrequest.TaskRequest">
+    <require
+        permission="zope2.View"
+        interface="..interfaces.ITaskRequest"
+        />
+  </class>
+  <class class=".task.Task">
+    <require
+        permission="zope2.View"
+        interface="..interfaces.ITask"
+        />
+    <require
+        permission="cmf.ModifyPortalContent"
+        set_schema="..interfaces.ITask"
+        />
+  </class>
+
+</configure>

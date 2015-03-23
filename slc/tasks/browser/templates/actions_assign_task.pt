@@ -1,0 +1,68 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="plone">
+  <body>
+    <div metal:fill-slot="main">
+
+      <h1 class="documentFirstHeading">
+        Assign Task
+      </h1>
+
+      <metal:task-request-details
+         use-macro="context/@@slc.tasks.macros/taskrequest-details" />
+
+      <div id="actions-already-assigned-task"
+           tal:define="existing_assignees view/existing_assignees">
+        <label i18n:translate="label_task_already_assigned">
+          Groups this task has already been assigned to:</label>
+        <div id="existing_assignees"
+             tal:repeat="existing_assignee existing_assignees"
+             tal:content="python:view.assignee_groups.get(existing_assignee,'')">
+          Austria
+        </div>
+      </div>
+
+      <div id="actions-assign-task">
+        <label
+           for="assign_task"
+           i18n:translate="heading_select_groups_to_assign_tasks">
+          Select additional groups to assign this task to:</label>
+        <form method="get"
+              name="assign_task"
+              id="actions-assign-task-form"
+              tal:attributes="action view/__name__"
+              tal:condition="not:view/assignees">
+          <fieldset>
+            <tal:group repeat="group view/group_ids">
+              <div class="assignee-checkbox">
+                <input type="checkbox"
+                       name="assignees:list"
+                       checked="checked"
+                       tal:attributes="value group" />
+                <span tal:replace="python:view.assignee_groups[group]"
+                      > Austria</span>
+              </div>
+            </tal:group>
+            <div class="visualClear"></div>
+          </fieldset>
+          <input type="submit" name="form.button.assign" value="Assign"/>
+          <input type="submit" name="form.button.cancel" value="Cancel"/>
+        </form>
+      </div>
+
+      <div id="actions-assigned-tasks"
+           tal:define="assignees view/assignees"
+           tal:condition="assignees">
+        <label i18n:translate="label_task_assigned">Assigned</label>:
+        <p tal:repeat="assignee assignees"
+           tal:content="python:view.assignee_groups[assignee]"></p>
+      </div>
+      <div class="visualClear"></div>
+
+    </div>
+  </body>
+</html>

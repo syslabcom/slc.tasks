@@ -1,0 +1,61 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      i18n:domain="plone">
+  <body>
+
+    <div metal:define-macro="taskrequest-details">
+
+      <h2 id="task-title" tal:content="context/title"
+          metal:define-slot="title">
+        Contribute to the promotion of the SME report 2011
+      </h2>
+
+
+      <div id="task-instruction">
+        <label i18n:translate="heading_task_instruction">Task Instruction</label>:
+        <div tal:content="context/description"
+             metal:define-slot="instruction"> Disseminate the Agency
+          news release and paper copies and CD ROM of the report.
+        </div>
+      </div>
+
+      <div id="task-contact">
+        <label>Agency contact person</label>:
+        <div tal:content="context/agencyContact">
+          Francoise Murillo (murillo@osha.eu.int)
+        </div>
+      </div>
+
+      <div id="task-priority">
+        <label i18n:translate="heading_priority">Priority</label>:
+        <div tal:content="context/priority">
+          Medium
+        </div>
+      </div>
+
+      <div id="task-due-date">
+        <label i18n:translate="heading_due_date">Due Date</label>
+        <div tal:content="context/dueDate | string:Unspecified">
+          2015/01/19
+        </div>
+      </div>
+
+      <div class="visualClear"></div>
+      <div id="task-export" tal:define="is_response is_response|nothing"
+         tal:condition="not:is_response">
+        <p>
+          <a href="#export"
+             tal:attributes="href string:${here/absolute_url}/tasksPDFView"
+             ><img src="pdf.png"
+                   tal:attributes="src string:${here/absolute_url}/pdf.png"
+                   />&nbsp;Export</a>
+        </p>
+      </div>
+
+    </div>
+
+  </body>
+</html>

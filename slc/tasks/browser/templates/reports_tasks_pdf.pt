@@ -1,0 +1,68 @@
+<html>
+
+    <head>
+        /* The standard CSS */
+        <!-- <link rel="stylesheet" href="styles.css" /> -->
+        <link rel="stylesheet" href="main.css" />
+        <link rel="stylesheet" href="pdf.css" />
+
+    </head>
+  <body tal:define="DateTime python:modules['DateTime'].DateTime">
+
+        <div class="title-box">
+            <table>
+                <tr>
+                    <td id="title-box-logo">
+                        <img src="logo.png" tal:attributes="src string:${here/absolute_url}/logo.jpg" /> 
+                    </td>
+                    <td id="title-box-text">
+                        Focal Point Tasks
+                    </td>
+                </tr>
+            </table>
+        </div>
+    <div>
+
+    <div class="footer">
+        <div id="footer-text">
+        Printed from OSHANET on <span tal:replace="python:here.toLocalizedTime(DateTime())">13/5/2010</span>
+        </div>
+        <div id="footer-page-counter" style="content: counter(page)"></div>
+    </div>
+
+      <h2 id="subtitle" tal:content="here/Title">Folder title</h2>
+
+      <div id="treetable-container">
+        <div id="treetable-scroll">
+
+          <table id="treetable">
+
+            <thead class="fixed-header">
+              <tr>
+                <th></th>
+                <th><p>Task Contact</p></th>
+                <th><p>Priority</p></th>
+                <th><p>Due / Start Date</p></th>
+
+                <th><p>In Progress</p></th>
+                <th><p>Completed</p></th>
+                <th><p>Pending</p></th>
+                <th><p>On Hold</p></th>
+                <th><p>Late</p></th>
+              </tr>
+            </thead>
+
+            <tbody tal:replace="structure python: view.tbody_html" />
+
+          </table>
+
+        </div>
+      </div>
+
+    </div>
+
+
+
+  </body>
+</html>
+

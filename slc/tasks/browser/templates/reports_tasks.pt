@@ -1,0 +1,46 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="plone">
+  <body>
+    <div metal:fill-slot="main">
+      <h1 class="documentFirstHeading">
+        Focal Point Tasks
+      </h1>
+
+      <div id="treetable-container">
+        <div id="treetable-scroll">
+
+          <table id="treetable">
+
+            <thead class="fixed-header">
+              <tr>
+                <th><p><a href="#export" tal:attributes="href
+                  string:${here/absolute_url}/tasksPDFView"><img src="pdf.png"
+                  tal:attributes="src string:${here/absolute_url}/pdf.png" />&#160;Export</a></p></th>
+                <th><p>Task Contact</p></th>
+                <th><p>Priority</p></th>
+                <th><p>Due / Start Date</p></th>
+
+                <th><p>In Progress</p></th>
+                <th><p>Completed</p></th>
+                <th><p>Pending</p></th>
+                <th><p>On Hold</p></th>
+                <th><p>Late</p></th>
+              </tr>
+            </thead>
+
+            <tbody tal:replace="structure python: view.tbody_html" />
+
+          </table>
+
+        </div>
+      </div>
+
+    </div>
+  </body>
+</html>
+

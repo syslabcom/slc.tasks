@@ -1,0 +1,129 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="context/main_template/macros/master"
+      i18n:domain="plone">
+  <body>
+    <div metal:fill-slot="main">
+
+      <div id="taskrequest" tal:define="is_response python:1">
+
+        <metal:task-request-details
+           use-macro="context/@@slc.tasks.macros/taskrequest-details">
+          <h2 metal:fill-slot="title"
+              id="task-title" tal:content="context/aq_parent/title">
+            Contribute to the promotion of the SME report 2011
+          </h2>
+          <div metal:fill-slot="instruction"
+               tal:content="context/aq_parent/description">
+            Disseminate the Agency news release and paper copies and
+            CD ROM of the report.
+          </div>
+
+        </metal:task-request-details>
+
+      </div>
+
+      <div id="taskresponse"
+           tal:define="wtool context/portal_workflow;
+                       review_state context/@@plone_context_state/workflow_state;
+                       review_state_title python:wtool.getTitleForStateOnType(review_state, 'TaskResponse');
+                       ">
+        <form id="form-task-response" tal:attributes="action view/__name__">
+          <fieldset class="formPanel">
+
+            <div id="task-comments" class="field">
+              <label i18n:translate="label_task_comments"
+                     for="task_comments">Comments</label>:
+              <div class="formHelp">
+                Any comments or queries you may have about this task
+              </div>
+              <textarea name="task_comments" id="description"
+                        cols="40" rows="5"
+                        class="blurrable firstToFocus"
+                        tal:content="context/description" >
+              </textarea>
+            </div>
+
+            <div id="task-start-date" class="field">
+              <label i18n:translate="label_start_date"
+                     for="startDate">Start Date</label>:
+              <div class="formHelp">
+                The date on which work commenced on this task
+              </div>
+              <tal:start_date
+                 replace="structure python:view.date_input_widget('startDate')"
+                 />
+            </div>
+
+            <div id="task-completion-date" class="field">
+              <label i18n:translate="label_completion_date"
+                     for="completionDate">Completion Date</label>:
+              <div class="formHelp">
+                The date on which this task was completed
+              </div>
+              <tal:completionDate
+                 replace="structure python:view.date_input_widget('completionDate')" />
+            </div>
+
+            <div id="task-state" class="field">
+              <label i18n:translate="task-state"
+                     for="task_status">Status</label>:
+              <div class="formHelp">The current status of this task</div>
+              <div tal:content="review_state_title">On Hold</div>
+            </div>
+
+            <div class="field">
+              <label i18n:translate="label_change_status">Change State</label>
+              <div class="formHelp"
+                   i18n:translate="help_change_task_status_action">
+                Change the state of the Task as required.
+              </div>
+            </div>
+
+            <div class='field'>
+              <input class="noborder"
+                     id="workflow_action"
+                     type="radio"
+                     name="workflow_action"
+                     title=""
+                     value=""
+                     checked="checked"
+                     tal:attributes="title review_state" />
+              <label for="workflow_action"
+                     i18n:translate="label_no_change">No change</label>
+              <br />
+
+              <tal:block define="transitions python:wtool.getTransitionsFor(context, context)"
+                         repeat="transition transitions">
+                <input class="noborder"
+                       id=""
+                       type="radio"
+                       name="workflow_action"
+                       title=""
+                       value=""
+                       i18n:attributes="title"
+                       tal:attributes="value transition/id;
+                                       id    transition/id;
+                                       title transition/name" />
+                <label for=""
+                       i18n:translate=""
+                       tal:attributes="for transition/id;"
+                       tal:content="transition/name"
+                       >Transition Name</label>
+                <br />
+              </tal:block>
+
+            </div>
+
+          </fieldset>
+          <input type="submit" value="Update" name="form.taskresponse.update" />
+        </form>
+      </div>
+      <div class="visualClear"></div>
+
+    </div>
+  </body>
+</html>

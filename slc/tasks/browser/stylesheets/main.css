@@ -1,0 +1,85 @@
+/*********
+Specific style for tables which use the treetable jquery plugin:
+collective.js.treetable.
+This makes the table body scroll so that the table head is always
+visible.
+
+Credit to Yurikolovsky from
+http://www.sitepoint.com/forums/showthread.php?t=615364&page=3
+*********/
+
+table#treetable {
+   width: 100%;
+   border-collapse: collapse;
+}
+
+#treetable-container {
+   position:relative;
+   padding:2em 0 0 0;/*compensation for top header */
+   width:99%;
+   margin:2em auto;
+   border: 1px solid black;
+}
+
+#treetable-scroll {
+   overflow:auto;
+   overflow-x:hidden;
+   border-top: 1px solid black;
+}
+
+#treetable-container th, #treetable-container td {/*makes table aestetically pleasing*/
+    width:100em; /*this should hold em*/
+}
+
+#treetable td {
+   border: 1px solid black;
+   padding: 5px;
+}
+
+#treetable thead.fixed-header tr th {
+   font-size: 80%;
+}
+
+thead tr p {
+   position:absolute;
+   top:0.5em;
+}
+
+table p {
+   margin:0;
+}
+
+#treetable td {
+/* FIXME this shouldn't be required, but treeTable seems to expect a
+padding on td cells */
+   padding-left: 19px;
+}
+
+#treetable td.task {
+   padding-left: 19px !important;
+}
+
+/* TaskRequest and TaskResponse pages */
+#taskrequest,
+body.template-assign-task #actions-already-assigned-task {
+   width: 50%;
+}
+
+body.template-task-response #taskrequest,
+body.template-assign-task #actions-already-assigned-task {
+   float: left;
+}
+
+#taskresponse,
+body.template-assign-task #actions-assign-task {
+   width: 50%;
+   float: right;
+}
+
+table#taskresponse-overview {
+   border: 1px solid #E3E2E2;
+}
+
+table#taskresponse-overview td {
+   text-align: center;
+}

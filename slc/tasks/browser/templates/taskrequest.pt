@@ -1,0 +1,86 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      lang="en"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="plone">
+  <body>
+
+    <div metal:fill-slot="main">
+
+      <h2 i18n:translate="heading_task_overview">Task Overview</h2>
+
+      <metal:task-request-details
+         use-macro="context/@@slc.tasks.macros/taskrequest-details" />
+
+      <div id="taskresponse-manage">
+        <p>
+          <a href="#"
+             tal:attributes="href string:${here/absolute_url}/taskresponse-manage"
+             >Manage Task Responses</a>
+        </p>
+      </div>
+
+      <table id="taskresponse-overview">
+        <thead>
+          <tr>
+            <th>Country</th>
+            <th>Start Date</th>
+            <th>Completion Date</th>
+            <th>In Progress</th>
+            <th>Completed</th>
+            <th>Pending</th>
+            <th>On Hold</th>
+            <th>Late</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr tal:repeat="assignee view/get_responses">
+            <td>
+              <a tal:attributes="href assignee/id"
+                 tal:content="assignee/title">Country</a></td>
+            <td tal:content="python:assignee.startDate">Start Date</td>
+            <td tal:content="assignee/completionDate | string:">Completion Date</td>
+
+            <td>
+              <img src="/++resource++slc.tasks.images/check32.png"
+                   tal:condition="python:view.is_current_state('in_progress',
+                                  assignee)" />
+            </td>
+            <td>
+              <img src="/++resource++slc.tasks.images/check32.png"
+                   tal:condition="python:view.is_current_state('completed',
+                                  assignee)" />
+            </td>
+            <td>
+              <img src="/++resource++slc.tasks.images/check32.png"
+                   tal:condition="python:view.is_current_state('pending',
+                                  assignee)" />
+            </td>
+            <td>
+              <img src="/++resource++slc.tasks.images/check32.png"
+                   tal:condition="python:view.is_current_state('on_hold',
+                                  assignee)" />
+            </td>
+            <td>
+              <img src="/++resource++slc.tasks.images/check32.png"
+                   tal:condition="python:view.is_current_state('late',
+                                  assignee)" />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <form name="folderContentsForm"
+            method="post"
+            action="folder_object"
+            tal:attributes="action context/absolute_url"
+            class="kssattr-serveraction-foldercontents_update_table">
+        <div tal:replace="structure view/contents_table"></div>
+        <input tal:replace="structure context/@@authenticator/authenticator" />
+      </form>
+
+    </div>
+  </body>
+</html>

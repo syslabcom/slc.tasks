@@ -1,0 +1,93 @@
+<configure
+   xmlns="http://namespaces.zope.org/zope"
+   xmlns:browser="http://namespaces.zope.org/browser"
+   i18n_domain="slc.tasks">
+
+  <include package="plone.app.contentmenu" />
+
+  <browser:resourceDirectory
+     name="slc.tasks.stylesheets"
+     directory="stylesheets"
+     />
+
+  <browser:resourceDirectory
+     name="slc.tasks.javascripts"
+     directory="javascripts"
+     />
+
+  <browser:resourceDirectory
+     name="slc.tasks.images"
+     directory="images"
+     />
+
+  <browser:page
+     for="..interfaces.taskrequest.ITaskRequest"
+     name="task-request"
+     class=".taskrequest.TaskRequestView"
+     permission="zope2.View"
+     />
+
+  <browser:page
+     for="..interfaces.taskresponse.ITaskResponse"
+     name="task-response"
+     class=".taskresponse.TaskResponseView"
+     permission="zope2.View"
+     />
+
+  <browser:page
+     for="*"
+     name="reports-assignee-tasks"
+     class=".reports.AssigneeTasksView"
+     permission="zope2.View"
+     />
+
+  <browser:page
+     for="*"
+     name="reports-tasks"
+     class=".reports.TasksView"
+     permission="zope2.View"
+     />
+
+  <browser:page
+     for="*"
+     name="reports-legacy-tasks"
+     class=".reports.LegacyTasksView"
+     permission="zope2.View"
+     />
+
+  <browser:page
+     for="*"
+     name="assign-task"
+     class=".actions.AssignTaskView"
+     permission="zope2.View"
+     />
+
+  <browser:page
+     for="*"
+     name="taskresponse-manage"
+     class=".actions.TaskResponseManage"
+     permission="zope2.View"
+     />
+
+  <browser:page
+     for="*"
+     name="slc.tasks.macros"
+     template="templates/macros.pt"
+     permission="zope.Public"
+     />
+
+  <browser:page
+     name="tasksPDFView"
+     for="*"
+     permission="zope2.View"
+     class=".pdf.TasksPDFView"
+     />
+
+  <browser:page
+     name="tasksAssigneePDFView"
+     for="*"
+     permission="zope2.View"
+     class=".pdf.TasksAssigneePDFView"
+     />
+
+</configure>

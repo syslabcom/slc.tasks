@@ -1,0 +1,4 @@
+div.grid_15, #portal-breadcrumbs, #navigation-divs, #search-container,
+#status-messages-container, #current-context-heading, #edit-bar, #footpanel{
+   display: none;
+}
